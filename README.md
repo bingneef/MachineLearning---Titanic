@@ -1,21 +1,26 @@
 # Machine Learning Decision Tree - Titanic
+
 Decision tree implementation of the 'classic' Titanic problem.
 
 ## Getting Started
+
 The following steps will get you started.
 
 ### Prerequisites
+
 ```
 pip3
 Python3
 ```
 
 ### Installing
+
 ```
 pip3 install pydotplus sklearn numpy pyparsing scipy
 ```
 
 ### Running
+
 To run:
 ```
 python3 main.py
@@ -47,5 +52,3 @@ See also the list of [contributors](https://github.com/your/project/contributors
 ## Acknowledgments
 
 * SciKit
-* Inspiration
-* etc
