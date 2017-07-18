@@ -1,5 +1,30 @@
 import random
 
+def calculateStats(clf, X_test, y_test, name):
+  # Results
+  correct = 0
+  oddsCorrect = 0
+  totalSize = len(X_test)
+  for index, line in enumerate(X_test):
+    target = y_test[index]
+    if clf.predict([line]) == target:
+      correct += 1
+
+    try:
+      oddsCorrect += clf.predict_proba([line])[0][target]
+    except AttributeError:
+      pass
+
+  try:
+    print(clf.get_params())
+  except AttributeError:
+    pass
+
+  percentage = round((correct / totalSize) * 100, 2)
+  certaintyOdds = round((oddsCorrect / totalSize) * 100, 2)
+
+  print("%s\nPercentage: %s, Odds: %s\n" % (name, percentage, certaintyOdds))
+
 def prepData(data):
   ppData = []
   ppTarget = []
@@ -17,10 +42,7 @@ def prepData(data):
     ppData.append(prepRow(row))
     ppTarget.append(prepAnswer(row))
 
-  return {
-    'data': ppData,
-    'target': ppTarget
-  }
+  return ppData, ppTarget
 
 def prepRow(row):
   try:
@@ -32,7 +54,15 @@ def prepRow(row):
     pClass = int(row['Pclass'])
     embarked = convertEmbarked(row['Embarked'])
 
-    return [sex, age, fare, sibSp, parch, pClass, embarked]
+    return [
+      sex,
+      age,
+      # fare,
+      # sibSp,
+      # parch,
+      pClass,
+      embarked
+    ]
 
   except ValueError:
     return []
